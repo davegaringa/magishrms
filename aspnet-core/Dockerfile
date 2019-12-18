@@ -20,6 +20,6 @@ WORKDIR /publish
  
 COPY --from=build-image /publish .
  
-ENTRYPOINT ["dotnet", "MagisHRMS.dll"]
+# ENTRYPOINT ["dotnet", "MagisHRMS.dll"]
 
-# CMD ASPNETCORE_URLS=http://*:$PORT dotnet MagisHRMS.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet MagisHRMS.dll
