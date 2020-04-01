@@ -42,7 +42,7 @@ namespace MagisHRMS
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "AccountOwner API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Magis HRMS API", Version = "v1" });
             });
         }
 
@@ -80,7 +80,7 @@ namespace MagisHRMS
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AccountOwner API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Magis HRMS API V1");
             });
         }
     }
