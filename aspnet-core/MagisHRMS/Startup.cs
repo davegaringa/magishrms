@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using System.IO;
 using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace MagisHRMS
 {
@@ -38,15 +40,19 @@ namespace MagisHRMS
 
             services.ConfigureRepositoryWrapper();
 
-            services.AddMvc();
+            //services.AddMvc();
+
+            services.ConfigureAuthentication();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Magis HRMS API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Magis HRMS API", Version = "v1" });
             });
+
+            services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -74,7 +80,15 @@ namespace MagisHRMS
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSwagger();
 
