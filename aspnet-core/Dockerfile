@@ -15,7 +15,8 @@ RUN dotnet test ./Tests/Tests.csproj
  
 RUN dotnet publish ./MagisHRMS/MagisHRMS.csproj -o /publish/
  
-FROM microsoft/aspnetcore
+# FROM microsoft/aspnetcore
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS final
  
 WORKDIR /publish
  
